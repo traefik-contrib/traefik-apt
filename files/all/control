@@ -6,4 +6,3 @@ Architecture: __PKG_ARCH__
 Essential: no
 Maintainer: __PKG_MAINTAINER__
 Description: Traefik modern HTTP reverse proxy and load balancer.
-Depends: libc6 (>= 2.28)

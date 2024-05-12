@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ARG PKG_NAME
 ARG PKG_VERSION
@@ -50,7 +50,7 @@ RUN cp $BUILD_DIR/src/CHANGELOG.md.gz $BUILD_DIR/build/usr/share/doc/traefik/
 # Template adjustments with sed
 RUN sed -i \
     -e "s|__PKG_NAME__|${PKG_NAME}|g" \
-    -e "s|__PKG_VERSION__|${PKG_VERSION}|g" \
+    -e "s|__PKG_VERSION__|${PKG_VERSION}-${PKG_RELEASE}|g" \
     -e "s|__PKG_ARCH__|${PKG_ARCH}|g" \
     -e "s|__PKG_MAINTAINER__|${PKG_MAINTAINER}|g" \
     $BUILD_DIR/build/DEBIAN/control
@@ -58,7 +58,6 @@ RUN sed -i \
 RUN chown root:root -R $BUILD_DIR/build
 RUN chown www-data:adm -R $BUILD_DIR/build/var/log/traefik
 RUN chown www-data:adm -R $BUILD_DIR/build/etc/traefik/acme.json
-RUN dpkg-deb --build $BUILD_DIR/build $BUILD_DIR/deb/${PKG_NAME}_${PKG_VERSION}_${PKG_ARCH}.deb
 
-# Output the location of the deb package
-CMD echo "Deb package is located in ${BUILD_DIR}/deb/${PKG_NAME}_${PKG_VERSION}_${PKG_ARCH}.deb"
+# Build image
+RUN dpkg-deb --build $BUILD_DIR/build $BUILD_DIR/deb/${PKG_NAME}_${PKG_VERSION}-${PKG_RELEASE}_${PKG_ARCH}.deb
