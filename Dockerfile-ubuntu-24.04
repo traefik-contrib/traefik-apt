@@ -1,13 +1,12 @@
-# Use an official Ubuntu base image
 FROM ubuntu:24.04
 
-# Set environment variables
-ENV PKG_NAME=traefik \
-    PKG_VERSION=3.0.0 \
-    PKG_ARCH=amd64 \
-    PKG_MAINTAINER="Roberto Berto <463349+robertoberto@users.noreply.github.com>" \
-    PKG_DOWNLOAD=https://github.com/traefik/traefik/releases/download/v3.0.0/traefik_v3.0.0_linux_amd64.tar.gz \
-    BUILD_DIR=/build/traefik-deb
+ARG PKG_NAME
+ARG PKG_VERSION
+ARG PKG_RELEASE
+ARG PKG_ARCH
+ARG PKG_MAINTAINER
+ARG PKG_DOWNLOAD
+ARG BUILD_DIR
 
 # Install necessary packages
 RUN apt-get update && \
@@ -26,13 +25,13 @@ RUN mkdir -p $BUILD_DIR/src \
     $BUILD_DIR/build/usr/share/doc/traefik
 
 # Set file permissions and copy configurations
-COPY files/postinst $BUILD_DIR/build/DEBIAN/
-COPY files/postrm $BUILD_DIR/build/DEBIAN/
-COPY files/control $BUILD_DIR/build/DEBIAN/control
-COPY files/systemd.conf $BUILD_DIR/build/etc/systemd/system/traefik.service
-COPY files/traefik.yml $BUILD_DIR/build/etc/traefik/
-COPY files/default.yml $BUILD_DIR/build/etc/traefik/conf.d/
-COPY files/logrotate.conf $BUILD_DIR/build/etc/logrotate.d/traefik
+COPY files/all/postinst $BUILD_DIR/build/DEBIAN/
+COPY files/all/postrm $BUILD_DIR/build/DEBIAN/
+COPY files/all/control $BUILD_DIR/build/DEBIAN/control
+COPY files/all/systemd.conf $BUILD_DIR/build/etc/systemd/system/traefik.service
+COPY files/all/traefik.yml $BUILD_DIR/build/etc/traefik/
+COPY files/all/default.yml $BUILD_DIR/build/etc/traefik/conf.d/
+COPY files/all/logrotate.conf $BUILD_DIR/build/etc/logrotate.d/traefik
 
 RUN chmod +x $BUILD_DIR/build/DEBIAN/postinst
 RUN chmod +x $BUILD_DIR/build/DEBIAN/postrm
