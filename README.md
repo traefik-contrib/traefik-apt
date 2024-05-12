@@ -39,27 +39,19 @@ Edit the .env file to set up environment variables such as PKG_VERSION, PKG_RELE
 
 To build a package for Ubuntu 24.04:
 ```
-make
 make build_docker_ubuntu_24_04
 ```
 
 For Ubuntu 22.04 LTS:
 ```
-make
 make build_docker_ubuntu_22_04
 ```
 
 For Debian 12:
 ```
-make
 make build_debian_12
 ```
 
-Build for All Supported Distributions:
-```
-make
-make build
-```
 
 ## Extending Support
 This setup can be enhanced to support additional Debian and Ubuntu releases by modifying the Dockerfiles and adjusting the build scripts accordingly.
