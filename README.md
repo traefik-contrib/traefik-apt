@@ -2,6 +2,29 @@
 
 This repository provides the necessary tools to build APT packages of Traefik for Ubuntu and Debian systems. It includes configurations to enhance security and manageability, ideal for deploying Traefik as a standalone service.
 
+## Current Work
+
+* a signed APT repository
+* and automating the build workflow to sync with Traefik's upstream releases
+* unit test against distros
+
+## Download Packages
+
+While we finalize the repository signing and automation, you can download the current `.deb` files directly. 
+Please verify the SHA256 checksums to confirm the integrity of the downloaded files.
+
+### Packages
+
+- [Debian 12: traefik_3.0.0-1_amd64.deb](https://apt.gradusrepo.com/dists/debian/12/main/binary-amd64/traefik_3.0.0-1_amd64.deb)
+- [Ubuntu 22.04: traefik_3.0.0-1_amd64.deb](https://apt.gradusrepo.com/dists/ubuntu/22.04/main/binary-amd64/traefik_3.0.0-1_amd64.deb)
+- [Ubuntu 24.04: traefik_3.0.0-1_amd64.deb](https://apt.gradusrepo.com/dists/ubuntu/24.04/main/binary-amd64/traefik_3.0.0-1_amd64.deb)
+
+### Checksums
+
+Ensure the authenticity and integrity of your downloads by checking their SHA256 checksums:
+
+- [SHA256SUM.txt](https://apt.gradusrepo.com/SHA256SUM.txt)
+
 ## Features
 
 - **Log Management**: Integration with `logrotate` to manage log files efficiently.
